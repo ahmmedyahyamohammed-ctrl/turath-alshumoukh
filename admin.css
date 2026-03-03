@@ -1,0 +1,536 @@
+/* ============================================
+   لوحة الإدارة - Admin Panel Styles
+   ============================================ */
+
+/* زر الدخول المخفي - يظهر فقط عند الضغط 5 مرات على اللوقو */
+.admin-login-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 3000;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+}
+
+.admin-login-overlay.active {
+    display: flex;
+}
+
+.admin-login-box {
+    background: var(--dark-surface);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+}
+
+.admin-login-box h2 {
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+}
+
+.admin-login-box p {
+    color: var(--text-secondary);
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+}
+
+.admin-input {
+    width: 100%;
+    padding: 14px 20px;
+    background: var(--dark-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 15px;
+    outline: none;
+    transition: var(--transition);
+    direction: ltr;
+}
+
+.admin-input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 15px rgba(200, 168, 78, 0.2);
+}
+
+.admin-login-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--dark-bg);
+    border: none;
+    border-radius: 12px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-bottom: 10px;
+}
+
+.admin-login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(200, 168, 78, 0.3);
+}
+
+.admin-cancel-btn {
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.admin-cancel-btn:hover {
+    border-color: #e74c3c;
+    color: #e74c3c;
+}
+
+.login-error {
+    color: #e74c3c;
+    font-size: 0.85rem;
+    margin-top: 10px;
+    display: none;
+}
+
+/* ============================================
+   ADMIN TOOLBAR (يظهر فقط بعد تسجيل الدخول)
+   ============================================ */
+.admin-toolbar {
+    display: none;
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    z-index: 2500;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.admin-toolbar.active {
+    display: flex;
+}
+
+.admin-tool-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    border: 1px solid var(--glass-border);
+    background: rgba(26, 26, 46, 0.95);
+    backdrop-filter: blur(10px);
+    color: var(--gold);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.admin-tool-btn:hover {
+    background: var(--gold);
+    color: var(--dark-bg);
+    transform: scale(1.1);
+    box-shadow: 0 5px 20px rgba(200, 168, 78, 0.3);
+}
+
+.admin-tool-btn .tooltip {
+    position: absolute;
+    right: 60px;
+    background: var(--dark-surface);
+    color: var(--cream);
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition);
+    border: 1px solid var(--glass-border);
+}
+
+.admin-tool-btn:hover .tooltip {
+    opacity: 1;
+}
+
+.admin-badge {
+    position: fixed;
+    top: 85px;
+    left: 80px;
+    background: #e74c3c;
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    z-index: 2501;
+    display: none;
+    animation: pulse 2s infinite;
+}
+
+.admin-badge.active {
+    display: block;
+}
+
+/* Admin mode indicator on product cards */
+.admin-mode .product-card {
+    position: relative;
+}
+
+.admin-mode .product-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.admin-mode .product-card[data-hidden="true"] {
+    display: block !important;
+    opacity: 0.4;
+    border: 2px dashed #e74c3c;
+}
+
+.admin-mode .product-card[data-hidden="true"]::after {
+    content: '🔒 مخفي';
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #e74c3c;
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 10;
+}
+
+/* Admin controls on each product card */
+.product-admin-controls {
+    display: none;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    z-index: 10;
+    gap: 6px;
+    justify-content: center;
+    padding: 10px;
+    background: rgba(13, 13, 26, 0.95);
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+}
+
+.admin-mode .product-admin-controls {
+    display: flex;
+}
+
+.product-ctrl-btn {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: none;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.product-ctrl-btn.edit-btn {
+    background: #3498db;
+    color: #fff;
+}
+.product-ctrl-btn.edit-btn:hover { background: #2980b9; }
+
+.product-ctrl-btn.hide-btn {
+    background: #f39c12;
+    color: #fff;
+}
+.product-ctrl-btn.hide-btn:hover { background: #e67e22; }
+
+.product-ctrl-btn.delete-btn {
+    background: #e74c3c;
+    color: #fff;
+}
+.product-ctrl-btn.delete-btn:hover { background: #c0392b; }
+
+/* ============================================
+   ADD/EDIT PRODUCT MODAL
+   ============================================ */
+.product-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 3500;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    padding: 20px;
+}
+
+.product-modal-overlay.active {
+    display: flex;
+}
+
+.product-modal {
+    background: var(--dark-surface);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 35px;
+    max-width: 550px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.product-modal h2 {
+    font-size: 1.6rem;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--dark-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-family: 'Tajawal', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--gold);
+}
+
+.form-group textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.form-group select {
+    cursor: pointer;
+}
+
+.form-group select option {
+    background: var(--dark-bg);
+    color: var(--text-primary);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.image-upload-area {
+    border: 2px dashed var(--glass-border);
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.image-upload-area:hover {
+    border-color: var(--gold);
+}
+
+.image-upload-area i {
+    font-size: 2rem;
+    color: var(--gold);
+    margin-bottom: 10px;
+    display: block;
+}
+
+.image-upload-area p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.image-upload-area input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.image-preview {
+    max-height: 150px;
+    border-radius: 8px;
+    margin-top: 10px;
+    display: none;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.modal-btn {
+    flex: 1;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.modal-btn.save-btn {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--dark-bg);
+}
+
+.modal-btn.save-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(200, 168, 78, 0.3);
+}
+
+.modal-btn.cancel-modal-btn {
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+}
+
+.modal-btn.cancel-modal-btn:hover {
+    border-color: #e74c3c;
+    color: #e74c3c;
+}
+
+/* Confirm delete modal */
+.confirm-modal {
+    text-align: center;
+    max-width: 400px;
+}
+
+.confirm-modal .confirm-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.confirm-modal p {
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+}
+
+.confirm-modal .product-name-confirm {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+}
+
+.modal-btn.delete-confirm-btn {
+    background: #e74c3c;
+    color: #fff;
+}
+
+.modal-btn.delete-confirm-btn:hover {
+    background: #c0392b;
+}
+
+/* Toast notification */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    padding: 15px 25px;
+    border-radius: 12px;
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    z-index: 4000;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.4s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.toast.success {
+    background: #27ae60;
+    color: #fff;
+}
+
+.toast.error {
+    background: #e74c3c;
+    color: #fff;
+}
+
+.toast.info {
+    background: #3498db;
+    color: #fff;
+}
+
+/* Responsive admin */
+@media (max-width: 768px) {
+    .admin-toolbar {
+        top: auto;
+        bottom: 100px;
+        left: 10px;
+        flex-direction: row;
+    }
+
+    .admin-tool-btn .tooltip {
+        right: auto;
+        bottom: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .product-modal {
+        padding: 25px;
+    }
+}
